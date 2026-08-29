@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ColorAI — Color Identification</title>
+
+    <link rel="stylesheet" href=".\style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Background -->
+    <div class="background-shape shape-1"></div>
+    <div class="background-shape shape-2"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+
+        <div class="logo">
+            <div class="logo-icon">
+                🎨
+            </div>
+            <span>Color<span class="gradient-text">Snap</span></span>
+        </div>
+
+        <div class="nav-links">
+            <a href="#how-it-works">How it works</a>
+            <a href="#about">About</a>
+        </div>
+
+    </nav>
+
+
+    <!-- Hero -->
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <div class="badge">
+                <span class="pulse"></span>
+                AI Powered Color Detection
+            </div>
+
+            <h1>
+                Discover the
+                <span class="gradient-text">exact color</span>
+                in your image.
+            </h1>
+
+            <p>
+                Upload an image, click on any point, and instantly
+                discover its color name, RGB values and HEX code.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- Main Application -->
+    <main class="app-container">
+
+        <!-- Upload Section -->
+        <div class="upload-card" id="uploadCard">
+
+            <div class="upload-icon">
+                📷
+            </div>
+
+            <h2>Upload your image</h2>
+
+            <p>
+                Drag & drop your image here or choose a file
+            </p>
+
+            <label for="imageInput" class="upload-button">
+                Choose Image
+            </label>
+
+            <input
+                type="file"
+                id="imageInput"
+                accept="image/*"
+                hidden
+            >
+
+            <div class="supported">
+                JPG · JPEG · PNG · WEBP
+            </div>
+
+        </div>
+
+
+        <!-- Image Workspace -->
+        <div class="workspace hidden" id="workspace">
+
+            <!-- Image Panel -->
+            <div class="image-panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <h3>Your Image</h3>
+                        <span>Click anywhere to identify a color</span>
+                    </div>
+
+                    <button id="changeImage" class="secondary-button">
+                        Change Image
+                    </button>
+
+                </div>
+
+                <div class="image-wrapper">
+
+                    <img id="previewImage" alt="Uploaded image">
+
+                    <div id="clickIndicator" class="click-indicator hidden"></div>
+
+                </div>
+
+                <div class="instruction">
+                    <span>💡</span>
+                    Click on any area of the image to detect its color
+                </div>
+
+            </div>
+
+
+            <!-- Result Panel -->
+            <div class="result-panel">
+
+                <div class="result-header">
+                    <span class="result-label">DETECTED COLOR</span>
+                    <span id="status" class="status">Ready</span>
+                </div>
+
+
+                <!-- Color Preview -->
+                <div
+                    class="color-preview"
+                    id="colorPreview"
+                    style="background: #e9edf5;"
+                >
+
+                    <div class="color-preview-text">
+                        <span id="colorNamePreview">No color selected</span>
+                    </div>
+
+                </div>
+
+
+                <!-- Color Name -->
+                <div class="color-name-section">
+
+                    <span class="small-label">COLOR NAME</span>
+
+                    <h2 id="colorName">
+                        Select a color
+                    </h2>
+
+                </div>
+
+
+                <!-- Values -->
+                <div class="values-grid">
+
+                    <div class="value-card">
+
+                        <span>HEX</span>
+
+                        <div class="value-row">
+
+                            <strong id="hexValue">—</strong>
+
+                            <button
+                                class="copy-button"
+                                data-copy="hexValue"
+                            >
+                                Copy
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="value-card">
+
+                        <span>RGB</span>
+
+                        <div class="value-row">
+
+                            <strong id="rgbValue">—</strong>
+
+                            <button
+                                class="copy-button"
+                                data-copy="rgbValue"
+                            >
+                                Copy
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- RGB Bars -->
+                <div class="rgb-section">
+
+                    <div class="rgb-title">
+                        <span>RGB Components</span>
+                    </div>
+
+                    <div class="rgb-bar-container">
+
+                        <div class="rgb-info">
+                            <span>R</span>
+                            <span id="redValue">0</span>
+                        </div>
+
+                        <div class="progress">
+                            <div id="redBar" class="progress-fill red"></div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="rgb-bar-container">
+
+                        <div class="rgb-info">
+                            <span>G</span>
+                            <span id="greenValue">0</span>
+                        </div>
+
+                        <div class="progress">
+                            <div id="greenBar" class="progress-fill green"></div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="rgb-bar-container">
+
+                        <div class="rgb-info">
+                            <span>B</span>
+                            <span id="blueValue">0</span>
+                        </div>
+
+                        <div class="progress">
+                            <div id="blueBar" class="progress-fill blue"></div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- How it works -->
+    <section id="how-it-works" class="how-section">
+
+        <div class="section-title">
+
+            <span class="section-badge">HOW IT WORKS</span>
+
+            <h2>
+                Color detection made simple.
+            </h2>
+
+        </div>
+
+
+        <div class="steps">
+
+            <div class="step">
+
+                <div class="step-number">01</div>
+
+                <h3>Upload</h3>
+
+                <p>
+                    Select any image from your device.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">02</div>
+
+                <h3>Click</h3>
+
+                <p>
+                    Click on the exact area whose color you want.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">03</div>
+
+                <h3>Discover</h3>
+
+                <p>
+                    Get the color name, HEX and RGB instantly.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+
+        <div class="logo">
+            🎨 Color<span class="gradient-text">AI</span>
+        </div>
+
+        <p>
+            Smart color identification using computer vision.
+        </p>
+
+    </footer>
+
+
+    <script src=".\script.js"></script>
+
+</body>
+</html>
